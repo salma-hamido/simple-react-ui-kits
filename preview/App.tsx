@@ -19,6 +19,79 @@ const ThemeContext = createContext<ThemeContextType>({
 
 const useTheme = () => useContext(ThemeContext);
 
+// Code Section Component
+interface CodeSectionProps {
+  title: string;
+  code: string;
+  language?: string;
+}
+
+const CodeSection: React.FC<CodeSectionProps> = ({ title, code, language = 'tsx' }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy code:', err);
+    }
+  };
+
+  return (
+    <div className="mt-4">
+      <div className="flex items-center justify-between">
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+        >
+          <svg 
+            className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-90' : ''}`} 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+          {title}
+        </button>
+        {isExpanded && (
+          <button
+            onClick={handleCopy}
+            className="flex items-center gap-2 px-3 py-1 text-xs font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+            title="Copy code"
+          >
+            {copied ? (
+              <>
+                <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Copied!
+              </>
+            ) : (
+              <>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                Copy
+              </>
+            )}
+          </button>
+        )}
+      </div>
+      {isExpanded && (
+        <div className="mt-2 p-4 bg-gray-900 rounded-md overflow-x-auto">
+          <pre className="text-sm text-gray-100">
+            <code>{code}</code>
+          </pre>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // Theme Controls Component
 interface ThemeControlsProps {
   radius: 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
@@ -124,7 +197,7 @@ const ThemeControls: React.FC<ThemeControlsProps> = ({
               } rounded transition-colors`}
             >
               {option.label}
-    </button>
+            </button>
           ))}
         </div>
       </div>
@@ -313,6 +386,40 @@ const Playground: React.FC = () => {
               </Button>
             </div>
           </div>
+          
+          <CodeSection 
+            title="Show Button Code"
+            code={`// Basic Button Usage
+<Button variant="primary" size="${size}" radius="${radius}">
+  Primary
+</Button>
+
+<Button variant="secondary" size="${size}" radius="${radius}">
+  Secondary
+</Button>
+
+<Button variant="outline" size="${size}" radius="${radius}">
+  Outline
+</Button>
+
+<Button variant="ghost" size="${size}" radius="${radius}">
+  Ghost
+</Button>
+
+<Button variant="danger" size="${size}" radius="${radius}">
+  Danger
+</Button>
+
+// Button with loading state
+<Button variant="primary" size="${size}" radius="${radius}" loading>
+  Loading
+</Button>
+
+// Disabled button
+<Button variant="primary" size="${size}" radius="${radius}" disabled>
+  Disabled
+</Button>`}
+          />
         </CardBody>
       </Card>
 
@@ -402,6 +509,76 @@ const Playground: React.FC = () => {
               />
             </div>
           </div>
+          
+          <CodeSection 
+            title="Show Input Code"
+            code={`// Basic Input Usage
+<Input
+  label="Small Input"
+  placeholder="Small size..."
+  size="sm"
+  radius="${radius}"
+/>
+
+<Input
+  label="Medium Input"
+  placeholder="Medium size..."
+  size="md"
+  radius="${radius}"
+/>
+
+<Input
+  label="Large Input"
+  placeholder="Large size..."
+  size="lg"
+  radius="${radius}"
+/>
+
+// Input with helper text
+<Input
+  label="With Helper Text"
+  placeholder="Enter your email..."
+  helperText="We'll never share your email with anyone else"
+  size="${size}"
+  radius="${radius}"
+/>
+
+// Input with error state
+<Input
+  label="Error State"
+  placeholder="Enter password..."
+  error="Password must be at least 8 characters"
+  size="${size}"
+  radius="${radius}"
+/>
+
+// Disabled input
+<Input
+  label="Disabled Input"
+  placeholder="This field is disabled"
+  disabled
+  size="${size}"
+  radius="${radius}"
+/>
+
+// Input with left icon
+<Input
+  label="With Left Icon"
+  placeholder="Search..."
+  leftIcon={<SearchIcon />}
+  size="${size}"
+  radius="${radius}"
+/>
+
+// Input with right icon
+<Input
+  label="With Right Icon"
+  placeholder="Enter amount..."
+  rightIcon={<CurrencyIcon />}
+  size="${size}"
+  radius="${radius}"
+/>`}
+          />
         </CardBody>
       </Card>
 
@@ -440,6 +617,49 @@ const Playground: React.FC = () => {
               </CardBody>
             </Card>
           </div>
+          
+          <CodeSection 
+            title="Show Card Code"
+            code={`// Basic Card Usage
+<Card className="${radiusClass}">
+  <CardHeader>
+    <h4 className="font-semibold">Card Title</h4>
+  </CardHeader>
+  <CardBody>
+    <p className="text-gray-600">This is a sample card with some content.</p>
+  </CardBody>
+  <CardFooter>
+    <Button variant="primary" size="sm" radius="${radius}">
+      Action
+    </Button>
+  </CardFooter>
+</Card>
+
+// Card with badge
+<Card className="${radiusClass}">
+  <CardHeader>
+    <h4 className="font-semibold">Another Card</h4>
+  </CardHeader>
+  <CardBody>
+    <p className="text-gray-600">Another card with different content.</p>
+    <div className="mt-3">
+      <Badge variant="primary">
+        Badge
+      </Badge>
+    </div>
+  </CardBody>
+</Card>
+
+// Card without footer
+<Card className="${radiusClass}">
+  <CardHeader>
+    <h4 className="font-semibold">Simple Card</h4>
+  </CardHeader>
+  <CardBody>
+    <p className="text-gray-600">Simple card without footer.</p>
+  </CardBody>
+</Card>`}
+          />
         </CardBody>
       </Card>
 
@@ -502,6 +722,59 @@ const Playground: React.FC = () => {
               Both Icons
             </Badge>
           </div>
+          
+          <CodeSection 
+            title="Show Badge Code"
+            code={`// Basic Badge Usage
+<Badge variant="primary">
+  Primary
+</Badge>
+
+<Badge variant="secondary">
+  Secondary
+</Badge>
+
+<Badge variant="success">
+  Success
+</Badge>
+
+<Badge variant="danger">
+  Danger
+</Badge>
+
+// Badge with left icon
+<Badge 
+  variant="primary"
+  leftIcon={<CheckIcon />}
+>
+  With Left Icon
+</Badge>
+
+// Badge with right icon
+<Badge 
+  variant="success"
+  rightIcon={<CheckIcon />}
+>
+  With Right Icon
+</Badge>
+
+// Badge with both icons
+<Badge 
+  variant="warning"
+  leftIcon={<WarningIcon />}
+  rightIcon={<InfoIcon />}
+>
+  Both Icons
+</Badge>
+
+// Custom styled badge
+<Badge 
+  variant="primary" 
+  className="bg-blue-600 text-white"
+>
+  Custom Styled
+</Badge>`}
+          />
         </CardBody>
       </Card>
     </div>
@@ -522,7 +795,7 @@ function App() {
             <div className="max-w-4xl mx-auto">
               <div className="mb-8">
                 <h1 className="text-4xl font-bold text-gray-900 mb-2">Simple React UI Kit</h1>
-                <p className="text-lg text-gray-600">Interactive playground with theme controls</p>
+                <p className="text-lg text-gray-600">Interactive playground with theme controls and code examples</p>
               </div>
               
               <Playground />
