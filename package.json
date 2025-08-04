@@ -16,6 +16,7 @@
     "clean": "rimraf dist",
     "preview": "vite",
     "preview:build": "vite build",
+    "preview:build:prod": "NODE_ENV=production vite build",
     "prepublishOnly": "npm run clean && npm run build",
     "prepack": "npm run build",
     "test:compatibility": "npm run build && node -e \"console.log('✅ Library built successfully for React 16-19 compatibility')\""
@@ -62,5 +63,5 @@
   "bugs": {
     "url": "https://github.com/salma-hamido/simple-react-ui-kits/issues"
   },
-  "homepage": "https://github.com/salma-hamido/simple-react-ui-kits#readme"
+  "homepage": "https://salma-hamido.github.io/simple-react-ui-kits"
 }

@@ -16,4 +16,5 @@ export default defineConfig({
   build: {
     outDir: 'preview-dist',
   },
+  base: process.env.NODE_ENV === 'production' ? '/simple-react-ui-kits/' : '/',
 }); 
