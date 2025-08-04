@@ -7,6 +7,7 @@ A lightweight, customizable React component library built with TypeScript and Ta
 **[View the interactive playground →](https://salma-hamido.github.io/simple-react-ui-kits/)**
 
 Experience all components with real-time theme customization, including:
+
 - 🎨 **12 Color Palettes**: Blue, Green, Purple, Red, Orange, Gray, Pink, Indigo, Teal, Yellow, Emerald, Rose
 - 📐 **6 Border Radius Options**: None, Small, Medium, Large, Extra Large, Full
 - 📏 **3 Size Variants**: Small, Medium, Large
