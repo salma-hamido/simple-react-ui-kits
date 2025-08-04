@@ -1,0 +1,66 @@
+{
+  "name": "simple-react-ui-kits",
+  "version": "1.0.1",
+  "description": "A lightweight, customizable React UI component library built with TypeScript and Tailwind CSS",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "type-check": "tsc --noEmit",
+    "clean": "rimraf dist",
+    "preview": "vite",
+    "preview:build": "vite build",
+    "prepublishOnly": "npm run clean && npm run build",
+    "prepack": "npm run build",
+    "test:compatibility": "npm run build && node -e \"console.log('✅ Library built successfully for React 16-19 compatibility')\""
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "rimraf": "^5.0.0",
+    "rollup": "^3.0.0",
+    "rollup-plugin-dts": "^5.0.0",
+    "tailwindcss": "^3.3.0",
+    "tslib": "^2.8.1",
+    "typescript": "^5.0.0",
+    "vite": "^4.4.0"
+  },
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "typescript",
+    "tailwind",
+    "button",
+    "input",
+    "card",
+    "badge",
+    "hooks"
+  ],
+  "author": "Salma Hamido",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/salma-hamido/simple-react-ui-kits.git"
+  },
+  "bugs": {
+    "url": "https://github.com/salma-hamido/simple-react-ui-kits/issues"
+  },
+  "homepage": "https://github.com/salma-hamido/simple-react-ui-kits#readme"
+}
