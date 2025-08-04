@@ -23,10 +23,39 @@ Experience all components with real-time theme customization, including:
 
 ## Installation
 
+### From NPM (Recommended)
+
 ```bash
 npm install simple-react-ui-kits
 # or
 yarn add simple-react-ui-kits
+# or
+pnpm add simple-react-ui-kits
+```
+
+### From GitHub
+
+You can also install directly from GitHub:
+
+```bash
+# Install from the main branch
+npm install github:salma-hamido/simple-react-ui-kits
+
+# Install from a specific tag/version
+npm install github:salma-hamido/simple-react-ui-kits#v1.0.1
+
+# Install from a specific branch
+npm install github:salma-hamido/simple-react-ui-kits#develop
+```
+
+### Using Yarn with GitHub
+
+```bash
+# Install from the main branch
+yarn add salma-hamido/simple-react-ui-kits
+
+# Install from a specific tag/version
+yarn add salma-hamido/simple-react-ui-kits#v1.0.1
 ```
 
 **Note**: This package requires Tailwind CSS to be installed in your project for styling to work properly.
@@ -259,6 +288,59 @@ truncateText("Long text here", 10); // "Long text..."
 3. Make your changes
 4. Add tests if applicable
 5. Submit a pull request
+
+## Publishing
+
+### Manual Publishing
+
+1. Build the package:
+
+   ```bash
+   npm run build
+   ```
+
+2. Publish to npm:
+   ```bash
+   npm publish
+   ```
+
+### Automated Publishing
+
+This repository uses GitHub Actions for automated publishing. To publish a new version:
+
+1. Run the release script:
+
+   ```bash
+   # For patch release (1.0.1 -> 1.0.2)
+   npm run release:patch
+
+   # For minor release (1.0.1 -> 1.1.0)
+   npm run release:minor
+
+   # For major release (1.0.1 -> 2.0.0)
+   npm run release:major
+   ```
+
+2. Push the changes and tag:
+   ```bash
+   git push origin main
+   git push origin --tags
+   ```
+
+The GitHub Action will automatically publish to npm when a new tag is pushed.
+
+### Setup for Automated Publishing
+
+1. Create an NPM token:
+
+   - Go to https://www.npmjs.com/settings/tokens
+   - Create a new token with "Automation" type
+   - Copy the token
+
+2. Add the token to GitHub Secrets:
+   - Go to your repository settings
+   - Navigate to "Secrets and variables" → "Actions"
+   - Add a new secret named `NPM_TOKEN` with your npm token
 
 ## License
 
