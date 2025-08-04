@@ -25,6 +25,8 @@ Thumbs.db
 .git/
 .gitignore
 .github/
+CHANGELOG.md
+workflow for better deployment*
 
 # Node
 node_modules/

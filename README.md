@@ -4,7 +4,7 @@ A lightweight, customizable React component library built with TypeScript and Ta
 
 ## 🚀 Live Demo
 
-**[View the interactive playground →](https://salma-hamido.github.io/simple-react-ui-kits/)**
+<a href="https://salma-hamido.github.io/simple-react-ui-kits/" target="_blank" rel="noopener noreferrer">**View the interactive playground →**</a>
 
 Experience all components with real-time theme customization, including:
 
